@@ -1,13 +1,11 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(actionlib)
 
-find_package(catkin REQUIRED COMPONENTS actionlib_msgs message_generation roscpp rostest rosunit std_msgs)
+find_package(catkin REQUIRED COMPONENTS actionlib_msgs message_generation roscpp std_msgs)
 find_package(Boost REQUIRED COMPONENTS thread)
 
 include_directories(include ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 link_directories(${catkin_LIBRARY_DIRS})
-
-catkin_python_setup()
 
 add_action_files(DIRECTORY action FILES Test.action TestRequest.action TwoInts.action)
 generate_messages(DEPENDENCIES actionlib_msgs std_msgs)
@@ -32,7 +30,3 @@ install(TARGETS ${PROJECT_NAME}
 install(DIRECTORY include/${PROJECT_NAME}/
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
   FILES_MATCHING PATTERN "*.h")
-
-if(CATKIN_ENABLE_TESTING)
-  add_subdirectory(test)
-endif()
